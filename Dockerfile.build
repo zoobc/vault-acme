@@ -1,0 +1,6 @@
+FROM golang:alpine
+RUN apk add --no-cache git make
+RUN GO111MODULE=on go get github.com/mitchellh/gox
+WORKDIR /go/src/github.com/remilapeyre/vault-acme
+COPY . .
+RUN GO111MODULE=on go get -d -v ./... && make all
